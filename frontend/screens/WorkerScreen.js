@@ -3,10 +3,13 @@ import { ScrollView, StyleSheet } from 'react-native';
 import JobItem  from '../components/JobItem';
 import { Header, Button } from 'react-native-elements';
 import { styles as s } from 'react-native-style-tachyons'
+import { connect } from 'react-redux';
+
+import {getAllJobs} from '../redux/modules/jobs'
 
 import Colors from '../constants/Colors';
 
-export default class WorkerScreen extends React.Component {
+class WorkerScreen extends React.Component {
   static navigationOptions = {
     title: 'Links',
     header: (
@@ -18,6 +21,10 @@ export default class WorkerScreen extends React.Component {
       />
     )
   };
+
+  componentDidMount() {
+    this.props.getAllJobs()
+  }
 
   render() {
     const list = [
@@ -33,10 +40,10 @@ export default class WorkerScreen extends React.Component {
     return (
       <ScrollView style={styles.container}>
           {
-            list.map((l, i) => (
+            this.props.jobs.allJobs.map((l, i) => (
               <JobItem
                 key={i}
-                name={l.name}
+                name={l.title}
                 startTime= {l.start_time}
                 hourlyRate= {l.hourly_bitcoin_rate}
               />
@@ -53,6 +60,14 @@ export default class WorkerScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
   }
 });
+
+const mapStateToProps = state => ({
+  jobs: state.jobs,
+});
+
+const mapDispatchToProps = {
+  getAllJobs,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(WorkerScreen);

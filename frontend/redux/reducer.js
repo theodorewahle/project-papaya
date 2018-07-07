@@ -1,14 +1,9 @@
 import { combineReducers } from 'redux';
+import jobsReducer from './modules/jobs'
 
-function testReducer(state = {}, action = {}) {
-  switch (action.type) {
-    // do reducer stuff
-    default: return state;
-  }
-}
 
 const reducers = {
-  test: testReducer
+  jobs: jobsReducer
 };
 
 const combinedReducers = combineReducers(reducers, {});
