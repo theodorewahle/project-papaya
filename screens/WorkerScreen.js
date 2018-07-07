@@ -1,10 +1,21 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
+import { Header } from 'react-native-elements';
 
-export default class LinksScreen extends React.Component {
+import Colors from '../constants/Colors';
+
+export default class WorkerScreen extends React.Component {
   static navigationOptions = {
     title: 'Links',
+    header: (
+      <Header
+        leftComponent={{ icon: 'face', color: Colors.white }}
+        centerComponent={{ text: 'Upcoming Jobs', style: { color: Colors.white } }}
+        rightComponent={{ icon: 'redeem', color: Colors.white }}
+        backgroundColor={Colors.primary}
+      />
+    )
   };
 
   render() {
@@ -22,6 +33,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff',
-  },
+    backgroundColor: '#fff'
+  }
 });
