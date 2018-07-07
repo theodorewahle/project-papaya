@@ -1,7 +1,8 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
-import { Header } from 'react-native-elements';
+import JobItem  from '../components/JobItem';
+import { Header, Button } from 'react-native-elements';
+import { styles as s } from 'react-native-style-tachyons'
 
 import Colors from '../constants/Colors';
 
@@ -19,11 +20,31 @@ export default class WorkerScreen extends React.Component {
   };
 
   render() {
+    const list = [
+      {
+        name: 'Mowing Lawn',
+        start_time: 'Thurs, July 9',
+        hourly_bitcoin_rate: '8'
+      },
+      {
+        name: 'Chris Jackson',
+      },
+    ]
     return (
       <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
-        <ExpoLinksView />
+          {
+            list.map((l, i) => (
+              <JobItem
+                key={i}
+                name={l.name}
+                startTime= {l.start_time}
+                hourlyRate= {l.hourly_bitcoin_rate}
+              />
+            ))
+          }
+        <Button
+          backgroundColor={Colors.primary}
+          title='Find another job' />
       </ScrollView>
     );
   }
@@ -33,6 +54,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff'
   }
 });

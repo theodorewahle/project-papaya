@@ -13,14 +13,12 @@ NativeTachyons.build(
   {
     /* REM parameter is optional, default is 16 */
     rem: Layout.isSmallDevice ? 16 : 18,
-    /* fontRem parameter is optional to allow adjustment in font-scaling. default falls back to rem */
-    fontRem: 20,
     colors: {
       palette: {
-        green: Colors.primary,
-        darkGreen: Colors.darkPrimary,
-        lightGreen: Colors.lightPrimary,
-        pink: Colors.accent,
+        primary: Colors.primary,
+        darkPrimary: Colors.darkPrimary,
+        lightPrimary: Colors.lightPrimary,
+        accent: Colors.accent,
         black: Colors.black,
         grey: Colors.grey,
         lightGrey: Colors.lightGrey,
