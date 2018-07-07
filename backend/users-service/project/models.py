@@ -1,16 +1,16 @@
-from app import db
+from project import db
 
-class UserAccount(db.Model):
+class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(128))
 
-class Jobs(db.Model):
+class Job(db.Model):
     __tablename__ = 'jobs'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128))
-    description = String(db.String(256))
-	status = db.Column(db.String(128)) #pending
+    description = db.Column(db.String(1000))
+    status = db.Column(db.String(128))
     start_time = db.Column(db.DateTime())
     end_time = db.Column(db.DateTime())
     worker = db.Column(db.Integer, db.ForeignKey('users.id'))
