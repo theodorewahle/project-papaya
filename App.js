@@ -1,13 +1,39 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
+import NativeTachyons from 'react-native-style-tachyons';
+
 import AppNavigator from './navigation/AppNavigator';
-import { Provider } from 'react-redux'
-import { store } from './redux/store'
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+import Colors from './constants/Colors';
+import Layout from './constants/Layout';
+
+NativeTachyons.build(
+  {
+    /* REM parameter is optional, default is 16 */
+    rem: Layout.isSmallDevice ? 16 : 18,
+    /* fontRem parameter is optional to allow adjustment in font-scaling. default falls back to rem */
+    fontRem: 20,
+    colors: {
+      palette: {
+        green: Colors.primary,
+        darkGreen: Colors.darkPrimary,
+        lightGreen: Colors.lightPrimary,
+        pink: Colors.accent,
+        black: Colors.black,
+        grey: Colors.grey,
+        lightGrey: Colors.lightGrey,
+        white: Colors.white
+      }
+    }
+  },
+  StyleSheet
+);
 
 export default class App extends React.Component {
   state = {
-    isLoadingComplete: false,
+    isLoadingComplete: false
   };
 
   render() {
@@ -33,17 +59,14 @@ export default class App extends React.Component {
 
   _loadResourcesAsync = async () => {
     return Promise.all([
-      Asset.loadAsync([
-        require('./assets/images/robot-dev.png'),
-        require('./assets/images/robot-prod.png'),
-      ]),
+      Asset.loadAsync([require('./assets/images/robot-dev.png'), require('./assets/images/robot-prod.png')]),
       Font.loadAsync({
         // This is the font that we are using for our tab bar
         ...Icon.Ionicons.font,
         // We include SpaceMono because we use it in HomeScreen.js. Feel free
         // to remove this if you are not using it in your app
-        'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-      }),
+        'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf')
+      })
     ]);
   };
 
@@ -61,6 +84,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
+    backgroundColor: '#fff'
+  }
 });
