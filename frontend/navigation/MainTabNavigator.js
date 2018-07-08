@@ -10,6 +10,7 @@ import EmployerScreen from '../screens/EmployerScreen.js';
 import Wallet from '../screens/Wallet';
 import JobBoard from '../screens/JobBoard';
 import JobDetail from '../screens/JobDetail';
+import AddJob from '../screens/AddJob';
 
 const WorkerStack = createStackNavigator({
   Worker: WorkerScreen,
@@ -29,7 +30,8 @@ WorkerStack.navigationOptions = {
 };
 
 const EmployerStack = createStackNavigator({
-  Employer: EmployerScreen
+  Employer: EmployerScreen,
+  AddJob: AddJob
 });
 
 EmployerStack.navigationOptions = {
