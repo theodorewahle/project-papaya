@@ -1,7 +1,7 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Text } from 'react-native';
+import { ScrollView, StyleSheet, View, Text, TextInput } from 'react-native';
 import JobItem from '../components/JobItem';
-import { Header, Button, Icon, FormInput } from 'react-native-elements';
+import { Header, Button, Icon } from 'react-native-elements';
 import { styles as s } from 'react-native-style-tachyons';
 import { connect } from 'react-redux';
 import DateTimePicker from 'react-native-modal-datetime-picker';
@@ -32,8 +32,7 @@ class AddJob extends React.Component {
   });
 
   state = {
-    DateTimePickerVisible: false,
-    start_time: new Date()
+    DateTimePickerVisible: false
   };
 
   _showDateTimePicker = () => {
@@ -53,19 +52,41 @@ class AddJob extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <View style={[s.bg_white, s.pa3]}>
+        <View style={[s.bg_white, s.pa3, s.mb3]}>
           <Text style={[s.b, s.f5]}>When is your job?</Text>
-          <FormInput
-            placeholder="date"
-            onFocus={this._showDateTimePicker}
-            value={this.state.start_time.toString()}
-          />
+          <View style={[s.ba, s.b__accent, s.br2, s.pa2, s.mt2]}>
+            <TextInput
+              placeholder="Select a date"
+              onFocus={this._showDateTimePicker}
+              value={this.state.start_time ? this.state.start_time.toLocaleString() : null}
+              style={[s.f6]}
+            />
+          </View>
           <DateTimePicker
             isVisible={this.state.isDateTimePickerVisible}
             onConfirm={this._handleDatePicked}
             onCancel={this._hideDateTimePicker}
             mode="datetime"
           />
+        </View>
+        <View style={[s.bg_white, s.pa3, s.mb3]}>
+          <Text style={[s.b, s.f5]}>Describe the help you need</Text>
+          <View style={[s.ba, s.b__accent, s.br2, s.pa2, s.mt2]}>
+            <TextInput placeholder="Name your job" />
+          </View>
+          <View style={[s.ba, s.b__accent, s.br2, s.pa2, s.mt2]}>
+            <TextInput
+              placeholder={'In a few sentences, describe the work. Include address and expected hours.\n\n'}
+              multiline={true}
+              numberOfLines={5}
+            />
+          </View>
+        </View>
+        <View style={[s.bg_white, s.pa3, s.mb3]}>
+          <Text style={[s.b, s.f5]}>How much are you paying per hour?</Text>
+          <View style={[s.ba, s.b__accent, s.br2, s.pa2, s.mt2]}>
+            <TextInput placeholder="0.02" />
+          </View>
         </View>
         <Button
           buttonStyle={[s.br3]}
