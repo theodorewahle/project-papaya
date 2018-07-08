@@ -5,6 +5,7 @@ import { Button } from 'react-native-elements';
 
 import Colors from '../constants/Colors';
 import JobInfo from './JobInfo';
+import { transformDatetimeToLongDate } from '../utils/transforms';
 
 export default class JobItem extends React.Component {
   render() {
@@ -25,7 +26,7 @@ export default class JobItem extends React.Component {
           ]}>
           <View style={[s.pl3]}>
             <Text style={[s.f4, s.b]}>{this.props.name}</Text>
-            <Text style={[s.f5, s.grey]}>{this.props.startDate}</Text>
+            <Text style={[s.f6, s.grey]}>{transformDatetimeToLongDate(this.props.startTime)}</Text>
           </View>
           <Button
             title="Details >"

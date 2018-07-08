@@ -4,6 +4,8 @@ import { styles as s } from 'react-native-style-tachyons';
 import { Icon } from 'react-native-elements';
 import Colors from '../constants/Colors';
 
+import { transformDatetimeToTime } from '../utils/transforms';
+
 const renderStars = employerRating => {
   let stars = [];
   var quotient = Math.floor(employerRating / 1);
@@ -27,11 +29,11 @@ const JobInfo = ({ startTime, hourlyRate, employerRating }) => (
       <View style={[s.pb1, s.min_h2]}>
         <Icon size={24} name="access-time" type="material-icons" color={Colors.primary} style={[s.pb5]} />
       </View>
-      <Text style={([s.f8], { color: Colors.primary })}>{startTime}</Text>
+      <Text style={([s.f8], { color: Colors.primary })}>{transformDatetimeToTime(startTime)}</Text>
     </View>
     <View style={[s.aic]}>
       <View style={[s.pb2, s.pt1, s.flx_row, s.min_h2]}>
-        <Text>{renderStars(1.2)}</Text>
+        <View style={[s.flx_row]}>{renderStars(1.2)}</View>
       </View>
       <Text style={[s.f8, { color: Colors.primary }]}>Employer Rating</Text>
     </View>
@@ -39,7 +41,7 @@ const JobInfo = ({ startTime, hourlyRate, employerRating }) => (
       <View style={[s.pb1, s.min_h2]}>
         <Icon size={24} name="bitcoin" type="font-awesome" color={Colors.primary} />
       </View>
-      <Text style={([s.f8], { color: Colors.primary })}>{hourlyRate}</Text>
+      <Text style={([s.f8], { color: Colors.primary })}>{`${hourlyRate}/hr`}</Text>
     </View>
   </View>
 );
