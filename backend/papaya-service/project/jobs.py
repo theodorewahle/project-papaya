@@ -1,5 +1,4 @@
 from flask import Blueprint, jsonify, request
-import datetime
 from project import db
 from project.models import Job
 from project.utils import db_object_as_dict
@@ -35,7 +34,7 @@ def get_jobs_by_status_and_employer(employer_id):
 
 @jobs_blueprint.route('/jobs/pending_worker/<worker_id>', methods=['GET'])
 def get_jobs_by_status_and_worker(worker_id):
-    jobs = Job.query.filter_by(worker=worker_id,status="pending")
+    jobs = Job.query.filter_by(worker=worker_id,status="Pending")
     jobs_list = []
     for job in jobs:
         job_object = db_object_as_dict(job)
@@ -44,7 +43,7 @@ def get_jobs_by_status_and_worker(worker_id):
         'status': 'success',
         'data': jobs_list
     }
-    return response_object
+    return jsonify(response_object), 200
 @jobs_blueprint.route('/jobs/update/<job_id>', methods=['PATCH'])
 def update_job(job_id):
     updatedable_fields = ['status','worker', 'start_time','end_time','description']

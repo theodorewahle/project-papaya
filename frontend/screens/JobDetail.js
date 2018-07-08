@@ -29,11 +29,12 @@ class JobDetail extends React.Component {
     const currentJob = this.props.jobs.allJobs.filter(function(obj) {
       return obj.id == jobId;
     });
-    this.setState({ currentJob });
+    console.log(currentJob);
+    this.setState({ currentJob: currentJob[0] });
   }
 
   tick() {
-    const BITCOIN_PER_SECOND = 0.0002;
+    const BITCOIN_PER_SECOND = 0.00017;
     b = moment.duration(1, 's');
     this.setState({
       hoursWorked: this.state.hoursWorked.add(b),
