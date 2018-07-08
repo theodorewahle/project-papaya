@@ -7,7 +7,9 @@ const instance = axios.create({
 });
 
 const getAllJobs = async () => await instance.get('jobs');
+const getPendingJobs = async user_id => await instance.get(`jobs/pending/${user_id}`);
 
 export default {
-  getAllJobs
+  getAllJobs,
+  getPendingJobs
 };

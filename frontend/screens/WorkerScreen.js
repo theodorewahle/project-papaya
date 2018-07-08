@@ -5,7 +5,7 @@ import { Header, Button, Icon } from 'react-native-elements';
 import { styles as s } from 'react-native-style-tachyons';
 import { connect } from 'react-redux';
 
-import { getAllJobs } from '../redux/modules/jobs';
+import { getPendingJobs } from '../redux/modules/jobs';
 
 import Colors from '../constants/Colors';
 
@@ -43,13 +43,13 @@ class WorkerScreen extends React.Component {
   });
 
   componentDidMount() {
-    this.props.getAllJobs();
+    this.props.getPendingJobs();
   }
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        {this.props.jobs.allJobs.map((l, i) => (
+        {this.props.jobs.pendingJobs.map((l, i) => (
           <JobItem
             key={i}
             name={l.name}
@@ -82,7 +82,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getAllJobs
+  getPendingJobs
 };
 export default connect(
   mapStateToProps,
