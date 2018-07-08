@@ -27,20 +27,17 @@ class WorkerScreen extends React.Component {
   }
 
   render() {
-    const list = [
-      {
-        name: 'Mowing Lawn',
-        start_time: 'Thurs, July 9',
-        hourly_bitcoin_rate: '8'
-      },
-      {
-        name: 'Chris Jackson'
-      }
-    ];
     return (
       <ScrollView style={styles.container}>
         {this.props.jobs.allJobs.map((l, i) => (
-          <JobItem key={i} name={l.name} startTime={l.start_time} hourlyRate={l.hourly_bitcoin_rate} />
+          <JobItem
+            key={i}
+            name={l.name}
+            startTime={l.start_time}
+            startDate={l.start_date}
+            hourlyRate={l.hourly_bitcoin_rate}
+            employerRating={l.employer_rating}
+          />
         ))}
         <Button backgroundColor={Colors.primary} title="Find another job" />
       </ScrollView>
