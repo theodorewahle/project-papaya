@@ -46,6 +46,9 @@ class JobBoard extends React.Component {
             startDate={l.start_date}
             hourlyRate={l.hourly_bitcoin_rate}
             employerRating={l.employer_rating}
+            onPress={() => this.props.navigation.navigate('JobDetail', { job: l.id })}
+            color={Colors.primary}
+            buttonText="Details >"
           />
         ))}
       </ScrollView>

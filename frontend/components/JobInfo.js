@@ -6,42 +6,42 @@ import Colors from '../constants/Colors';
 
 import { transformDatetimeToTime } from '../utils/transforms';
 
-const renderStars = employerRating => {
+const renderStars = (employerRating, color) => {
   let stars = [];
   var quotient = Math.floor(employerRating / 1);
   var remainder = employerRating % quotient;
 
   for (i = 0; i < quotient; i++) {
-    stars.push(<Icon size={16} name="star" type="font-awesome" color={Colors.primary} />);
+    stars.push(<Icon size={16} name="star" type="font-awesome" color={color} />);
   }
   if (remainder > 0) {
-    stars.push(<Icon size={16} name="star-half-o" type="font-awesome" color={Colors.primary} />);
+    stars.push(<Icon size={16} name="star-half-o" type="font-awesome" color={color} />);
   }
   for (i = 0; stars.length < 5; i++) {
-    stars.push(<Icon size={16} name="star-o" type="font-awesome" color={Colors.primary} />);
+    stars.push(<Icon size={16} name="star-o" type="font-awesome" color={color} />);
   }
   return stars;
 };
 
-const JobInfo = ({ startTime, hourlyRate, employerRating }) => (
+const JobInfo = ({ startTime, hourlyRate, employerRating, color }) => (
   <View style={[s.flx_row, s.jcsa, s.pb3, s.pt3]}>
     <View style={[s.aic]}>
       <View style={[s.pb1, s.min_h2]}>
-        <Icon size={24} name="access-time" type="material-icons" color={Colors.primary} style={[s.pb5]} />
+        <Icon size={24} name="access-time" type="material-icons" color={color} style={[s.pb5]} />
       </View>
-      <Text style={([s.f8], { color: Colors.primary })}>{transformDatetimeToTime(startTime)}</Text>
+      <Text style={([s.f8], { color: color })}>{transformDatetimeToTime(startTime)}</Text>
     </View>
     <View style={[s.aic]}>
       <View style={[s.pb2, s.pt1, s.flx_row, s.min_h2]}>
-        <View style={[s.flx_row]}>{renderStars(1.2)}</View>
+        <View style={[s.flx_row]}>{renderStars(employerRating, color)}</View>
       </View>
-      <Text style={[s.f8, { color: Colors.primary }]}>Employer Rating</Text>
+      <Text style={[s.f8, { color: color }]}>Employer Rating</Text>
     </View>
     <View style={[s.aic]}>
       <View style={[s.pb1, s.min_h2]}>
-        <Icon size={24} name="bitcoin" type="font-awesome" color={Colors.primary} />
+        <Icon size={24} name="bitcoin" type="font-awesome" color={color} />
       </View>
-      <Text style={([s.f8], { color: Colors.primary })}>{`${hourlyRate}/hr`}</Text>
+      <Text style={([s.f8], { color: color })}>{`${hourlyRate}/hr`}</Text>
     </View>
   </View>
 );

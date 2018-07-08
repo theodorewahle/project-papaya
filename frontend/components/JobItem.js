@@ -29,9 +29,9 @@ export default class JobItem extends React.Component {
             <Text style={[s.f6, s.grey]}>{transformDatetimeToLongDate(this.props.startTime)}</Text>
           </View>
           <Button
-            title="Details >"
+            title={this.props.buttonText}
             buttonStyle={[s.br3]}
-            backgroundColor={Colors.primary}
+            backgroundColor={this.props.color}
             onPress={this.props.onPress}
           />
         </View>
@@ -39,6 +39,7 @@ export default class JobItem extends React.Component {
           startTime={this.props.startTime}
           hourlyRate={this.props.hourlyRate}
           employerRating={this.props.employerRating}
+          color={this.props.color}
         />
       </View>
     );

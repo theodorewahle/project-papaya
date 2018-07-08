@@ -6,10 +6,11 @@ import Colors from '../constants/Colors';
 
 import TabBarIcon from '../components/TabBarIcon';
 import WorkerScreen from '../screens/WorkerScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import EmployerScreen from '../screens/EmployerScreen.js';
 import Wallet from '../screens/Wallet';
 import JobBoard from '../screens/JobBoard';
 import JobDetail from '../screens/JobDetail';
+import AddJob from '../screens/AddJob';
 
 const WorkerStack = createStackNavigator({
   Worker: WorkerScreen,
@@ -28,11 +29,12 @@ WorkerStack.navigationOptions = {
   )
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen
+const EmployerStack = createStackNavigator({
+  Employer: EmployerScreen,
+  AddJob: AddJob
 });
 
-SettingsStack.navigationOptions = {
+EmployerStack.navigationOptions = {
   tabBarLabel: 'Get Help',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -52,8 +54,8 @@ const BottomTabNavigatorConfig = {
 };
 export default createBottomTabNavigator(
   {
-    WorkerStack,
-    SettingsStack
+    EmployerStack,
+    WorkerStack
   },
   BottomTabNavigatorConfig
 );

@@ -9,7 +9,7 @@ import { getPendingJobs } from '../redux/modules/jobs';
 
 import Colors from '../constants/Colors';
 
-class WorkerScreen extends React.Component {
+class EmployerScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     header: (
       <Header
@@ -37,7 +37,7 @@ class WorkerScreen extends React.Component {
             hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
           />
         }
-        backgroundColor={Colors.primary}
+        backgroundColor={Colors.accent}
       />
     )
   });
@@ -58,15 +58,15 @@ class WorkerScreen extends React.Component {
             hourlyRate={l.hourly_bitcoin_rate}
             employerRating={l.employer_rating}
             onPress={() => this.props.navigation.navigate('JobDetail', { job: l.id })}
-            color={Colors.primary}
-            buttonText="Details >"
+            color={Colors.accent}
+            buttonText={'Pending...'}
           />
         ))}
         <Button
           buttonStyle={[s.br3]}
-          backgroundColor={Colors.primary}
-          onPress={() => this.props.navigation.navigate('JobBoard')}
-          title="Find another job"
+          backgroundColor={Colors.accent}
+          onPress={() => this.props.navigation.navigate('AddJob')}
+          title="Post another job"
         />
       </ScrollView>
     );
@@ -89,4 +89,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(WorkerScreen);
+)(EmployerScreen);
