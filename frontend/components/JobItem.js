@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import { styles as s } from 'react-native-style-tachyons';
-import { Button, Icon } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 
 import Colors from '../constants/Colors';
+import JobInfo from './JobInfo';
 
 export default class JobItem extends React.Component {
   render() {
@@ -28,21 +29,11 @@ export default class JobItem extends React.Component {
           </View>
           <Button title="Details >" buttonStyle={[s.br3]} backgroundColor={Colors.primary} />
         </View>
-
-        <View style={[s.flx_row, s.jcsa, s.pa3]}>
-          <View>
-            <Icon name="access-time" type="material-icons" color={Colors.primary} />
-            <Text style={[s.f8]}>{this.props.startTime}</Text>
-          </View>
-          <View>
-            <Icon name="money" type="font-awesome" color={Colors.primary} />
-            <Text style={[s.f8]}>{this.props.hourlyRate}</Text>
-          </View>
-          <View>
-            <Icon name="star" type="font-awesome" color={Colors.primary} />
-            <Text style={[s.f8, s[Colors.primary]]}>{this.props.employerRating}</Text>
-          </View>
-        </View>
+        <JobInfo
+          startTime={this.props.startTime}
+          hourlyRate={this.props.hourlyRate}
+          employerRating={this.props.employerRating}
+        />
       </View>
     );
   }
