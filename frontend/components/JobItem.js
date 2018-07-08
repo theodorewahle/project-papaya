@@ -27,7 +27,12 @@ export default class JobItem extends React.Component {
             <Text style={[s.f4, s.b]}>{this.props.name}</Text>
             <Text style={[s.f5, s.grey]}>{this.props.startDate}</Text>
           </View>
-          <Button title="Details >" buttonStyle={[s.br3]} backgroundColor={Colors.primary} />
+          <Button
+            title="Details >"
+            buttonStyle={[s.br3]}
+            backgroundColor={Colors.primary}
+            onPress={this.props.onPress}
+          />
         </View>
         <JobInfo
           startTime={this.props.startTime}

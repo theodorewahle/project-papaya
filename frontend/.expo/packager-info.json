@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19001,
-  "packagerPort": 19002,
-  "packagerPid": 34924,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 35690,
   "expoServerNgrokUrl": "https://rh-yei.voshawn.frontend.exp.direct",
   "packagerNgrokUrl": "https://packager.rh-yei.voshawn.frontend.exp.direct",
-  "ngrokPid": 34938
+  "ngrokPid": 35715
 }
