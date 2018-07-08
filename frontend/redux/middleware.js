@@ -1,4 +1,4 @@
 import thunkMiddleware from 'redux-thunk';
-import logger from 'redux-logger'
+import logger from 'redux-logger';
 // define store middlewares as an array
-export default [logger, thunkMiddleware, ];
+export default [thunkMiddleware, logger];
