@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View, Text } from 'react-native';
 import JobItem from '../components/JobItem';
 import { Header, Button, Icon } from 'react-native-elements';
 import { styles as s } from 'react-native-style-tachyons';
@@ -9,7 +9,7 @@ import Colors from '../constants/Colors';
 
 class Wallet extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Wallet',
+    title: 'Wallets',
     header: (
       <Header
         outerContainerStyles={{
@@ -36,7 +36,21 @@ class Wallet extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Button backgroundColor={Colors.accent} title="Cash Out" />
+        <View style={[s.flx_row, s.pa3, s.bg_white, s.mb3]}>
+          <View>
+            <Text style={[s.f4, { color: Colors.primary }]}>Papaya</Text>
+            <Text style={[s.f4, { color: Colors.primary }]}>Balance</Text>
+          </View>
+          <View style={[s.flx_row]}>
+            <Text style={[s.f3]}>0.087378</Text>
+            <Text style={[s.f3, { color: Colors.accent }]}>BTC</Text>
+          </View>
+        </View>
+        <View style={[s.pa3, s.bg_white, s.ma3, s.mt0, s.br3]}>
+          <Text style={[s.f3]}>Bitcoin Wallet</Text>
+          <Text>0xeD0f5cF0ca3BE355c70D09B4b75C47AA0...</Text>
+        </View>
+        <Button buttonStyle={[s.br3]} backgroundColor={Colors.accent} title="Cash Out" />
       </ScrollView>
     );
   }
