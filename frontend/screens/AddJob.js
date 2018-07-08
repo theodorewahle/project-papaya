@@ -60,6 +60,7 @@ class AddJob extends React.Component {
               onFocus={this._showDateTimePicker}
               value={this.state.start_time ? this.state.start_time.toLocaleString() : null}
               style={[s.f6]}
+              underlineColorAndroid="transparent"
             />
           </View>
           <DateTimePicker
@@ -72,20 +73,21 @@ class AddJob extends React.Component {
         <View style={[s.bg_white, s.pa3, s.mb3]}>
           <Text style={[s.b, s.f5]}>Describe the help you need</Text>
           <View style={[s.ba, s.b__accent, s.br2, s.pa2, s.mt2]}>
-            <TextInput placeholder="Name your job" />
+            <TextInput placeholder="Name your job" underlineColorAndroid="transparent" />
           </View>
           <View style={[s.ba, s.b__accent, s.br2, s.pa2, s.mt2]}>
             <TextInput
               placeholder={'In a few sentences, describe the work. Include address and expected hours.\n\n'}
               multiline={true}
               numberOfLines={5}
+              underlineColorAndroid="transparent"
             />
           </View>
         </View>
         <View style={[s.bg_white, s.pa3, s.mb3]}>
           <Text style={[s.b, s.f5]}>How much are you paying per hour?</Text>
           <View style={[s.ba, s.b__accent, s.br2, s.pa2, s.mt2]}>
-            <TextInput placeholder="0.02" />
+            <TextInput placeholder="0.02" underlineColorAndroid="transparent" keyboardType="numeric" />
           </View>
         </View>
         <Button
