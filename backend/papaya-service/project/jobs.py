@@ -22,30 +22,29 @@ def get_jobs():
 # TODO This needs to go in the users API side 
 @jobs_blueprint.route('/jobs/pending_employer/<employer_id>', methods=['POST','GET'])
 def get_jobs_by_status_and_employer(employer_id):
-    #jobs = Job.query.filter_by(employer=employer_id,status="pending")
-    #jobs_list = []
-    #for job in jobs:
-    #    job_object = db_object_as_dict(job)
-    #    jobs_list.append(job_object)
-    Job.query.delete()
+    jobs = Job.query.filter_by(employer=employer_id,status="pending")
+    jobs_list = []
+    for job in jobs:
+        job_object = db_object_as_dict(job)
+        jobs_list.append(job_object)
     db.session.commit()
     response_object = {
         'status': 'success',
     }
     return jsonify(response_object), 200
 
-#@jobs_blueprint.route('/jobs/pending_worker/<worker_id>', methods=['GET'])
-#def get_jobs_by_status_and_worker(worker_id):
-#    jobs = Job.query.filter_by(worker=worker_id,status="pending")
-#    jobs_list = []
-#    for job in jobs:
-#        job_object = db_object_as_dict(job)
-#        jobs_list.append(job_object)
-#    response_object = {
-#        'status': 'success',
-#        'data': jobs_list
-#    }
-#    return response_object
+@jobs_blueprint.route('/jobs/pending_worker/<worker_id>', methods=['GET'])
+def get_jobs_by_status_and_worker(worker_id):
+    jobs = Job.query.filter_by(worker=worker_id,status="pending")
+    jobs_list = []
+    for job in jobs:
+        job_object = db_object_as_dict(job)
+        jobs_list.append(job_object)
+    response_object = {
+        'status': 'success',
+        'data': jobs_list
+    }
+    return response_object
 @jobs_blueprint.route('/jobs/update/<job_id>', methods=['PATCH'])
 def update_job(job_id):
     updatedable_fields = ['status','worker', 'start_time','end_time','description']
