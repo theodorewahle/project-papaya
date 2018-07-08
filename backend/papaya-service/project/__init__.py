@@ -35,6 +35,8 @@ def create_app():
     app.register_blueprint(jobs_blueprint)
     from project.users import users_blueprint
     app.register_blueprint(users_blueprint)
+    from project.rehive import rehive_blueprint
+    app.register_blueprint(rehive_blueprint)
 
     @app.route("/")
     def hello():
