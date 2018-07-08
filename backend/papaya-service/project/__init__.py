@@ -38,7 +38,7 @@ def create_app():
 
     @app.route("/")
     def hello():
-        return "<h1 style='color:blue'>Hello There!</h1>"
+        return "<h1 style='color:blue'>It's Papaya bby!</h1>"
 
     return app
 

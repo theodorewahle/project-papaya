@@ -1,4 +1,5 @@
 from flask_script import Manager
+from datetime import datetime
 
 from project import create_app, db
 from project.models import User, Job
@@ -28,7 +29,13 @@ def seed_db():
     db.session.commit()
     job1 = Job(
             name='Mowing the Lawn',
-            description="This is the description"
+            description="This is the description",
+            status="pending",
+            start_time=datetime.now(),
+            end_time=datetime.now(),
+            worker_rating=3.7,
+            employer_rating=3.8,
+            hourly_bitcoin_rate=0.002
             )
     db.session.add(job1)
     db.session.commit()
