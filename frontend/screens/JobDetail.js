@@ -20,7 +20,18 @@ class JobDetail extends React.Component {
     bitcoinEarned: '0.00000',
     interval: null,
     stars: 0
+    currentJob: {}
+
   };
+  async componentDidMount() {
+    await this.props.getAllJobs();
+    const jobId = this.props.navigation.getParam('job', 1);
+    this.props.jobs.allJobs;
+    const currentJob = this.props.jobs.allJobs.filter(function(obj) {
+      return obj.id == jobId;
+    });
+    this.setState({ currentJob });
+  }
 
   tick() {
     const BITCOIN_PER_SECOND = 0.0002;
@@ -96,12 +107,6 @@ class JobDetail extends React.Component {
   };
 
   render() {
-    const currentJob = {
-      name: 'Apple Picking',
-      status: 'active',
-      description:
-        'Lorem ipsum dolor sit amet, nonummy ligula volutpat hac integer nonummy. Suspendisse ultricies, congue etiam tellus, erat libero, nulla eleifend, mauris pellentesque. Suspendisse integer praesent vel, integer gravida mauris, fringilla vehicula lacinia non'
-    };
     return (
       <ScrollView style={styles.container}>
         <Modal
@@ -180,7 +185,7 @@ class JobDetail extends React.Component {
           </View>
         </Modal>
         <View style={[s.bg_white, s.mb3]}>
-          <JobInfo />
+          <JobInfo color={Colors.primaryColor} />
         </View>
         {this.state.jobStatus === 'active' && (
           <View style={[s.jcsb, s.mh3, s.mb2, s.br3, s.pa2, s.flx_row]}>
@@ -200,9 +205,9 @@ class JobDetail extends React.Component {
         )}
         <View style={[s.bg_white, s.mh3, s.br3, s.mb3]}>
           <View style={[s.bg_primary, s.br__top, s.br3]}>
-            <Text style={[s.f5, s.white, s.pv2, s.ph3]}>{currentJob.name}</Text>
+            <Text style={[s.f5, s.white, s.pv2, s.ph3]}>{this.state.currentJob.name}</Text>
           </View>
-          <Text style={[s.pa2]}>{currentJob.description}</Text>
+          <Text style={[s.pa2]}>{this.state.currentJob.description}</Text>
         </View>
         {this.state.jobStatus === 'paid' &&
           this.state.userType === 'worker' && (
@@ -246,9 +251,13 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  jobs: state.jobs
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getAllJobs
+};
 export default connect(
   mapStateToProps,
   mapDispatchToProps
