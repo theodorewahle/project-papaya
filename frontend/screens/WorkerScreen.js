@@ -29,7 +29,8 @@ class WorkerScreen extends React.Component {
         centerComponent={{ text: 'Upcoming Jobs', style: [s.white, s.f5] }}
         rightComponent={
           <Icon
-            name="redeem"
+            name="wallet"
+            type="entypo"
             color={Colors.white}
             size={26}
             onPress={() => navigation.navigate('Wallet')}
@@ -60,6 +61,7 @@ class WorkerScreen extends React.Component {
           />
         ))}
         <Button
+          buttonStyle={[s.br3]}
           backgroundColor={Colors.primary}
           onPress={() => this.props.navigation.navigate('JobBoard')}
           title="Find another job"

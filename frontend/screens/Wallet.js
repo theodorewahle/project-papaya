@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View, Text } from 'react-native';
 import JobItem from '../components/JobItem';
 import { Header, Button, Icon } from 'react-native-elements';
 import { styles as s } from 'react-native-style-tachyons';
@@ -9,7 +9,7 @@ import Colors from '../constants/Colors';
 
 class Wallet extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Wallet',
+    title: 'Wallets',
     header: (
       <Header
         outerContainerStyles={{
@@ -36,7 +36,29 @@ class Wallet extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Button backgroundColor={Colors.accent} title="Cash Out" />
+        <View style={[s.flx_row, s.pa3, s.bg_white, s.mb3]}>
+          <View style={[s.br, s.b__lightGrey, s.pv3, s.pr3]}>
+            <Text style={[s.f5]}>Account</Text>
+            <Text style={[s.f5]}>Balance</Text>
+          </View>
+          <View style={[s.flx_row, s.ml1, s.pa3]}>
+            <Text style={[s.f2, s.mr3, { color: Colors.primary }]}>0.087378</Text>
+            <Text style={[s.f3, s.mt2]}>BTC</Text>
+          </View>
+        </View>
+        <View style={[s.pa3, s.bg_white, s.ma3, s.mt0, s.br3]}>
+          <Text style={[s.f3]}>Coinbase</Text>
+          <Text>0xeD0f5cF0ca3BE355c70D09B4b75C47AA0...</Text>
+          <Button
+            buttonStyle={[s.br3, s.mt3]}
+            backgroundColor={Colors.accent}
+            title="Cash Out"
+            leftIcon={{ name: 'send', type: 'font-awesome' }}
+          />
+        </View>
+        <View style={[s.pa1, s.br3, s.aic]}>
+          <Text style={[s.f3, s.lightGrey]}>+ Add Wallet</Text>
+        </View>
       </ScrollView>
     );
   }
