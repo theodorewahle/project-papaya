@@ -32,7 +32,8 @@ class AddJob extends React.Component {
   });
 
   state = {
-    isDateTimePickerVisible: false
+    DateTimePickerVisible: false,
+    start_time: new Date()
   };
 
   _showDateTimePicker = () => {

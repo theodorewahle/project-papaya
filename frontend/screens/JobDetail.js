@@ -25,7 +25,7 @@ class JobDetail extends React.Component {
     b = moment.duration(1, 's');
     this.setState({
       hoursWorked: this.state.hoursWorked.add(b),
-      bitcoinEarned: Number.parseFloat(this.state.bitcoinEarned) + BITCOIN_PER_SECOND
+      bitcoinEarned: (Number.parseFloat(this.state.bitcoinEarned) + BITCOIN_PER_SECOND).toFixed(5)
     });
   }
 
@@ -37,6 +37,7 @@ class JobDetail extends React.Component {
 
   endJob() {
     this.interval = clearInterval(this.state.interval);
+    this.setModalVisible(true);
   }
 
   static navigationOptions = ({ navigation }) => ({
@@ -81,7 +82,6 @@ class JobDetail extends React.Component {
   }
 
   setModalVisible = visible => {
-    console.log('blah');
     this.setState({ modalVisible: visible });
   };
 

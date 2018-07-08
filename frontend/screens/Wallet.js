@@ -31,6 +31,10 @@ class Wallet extends React.Component {
     )
   });
 
+  state = {
+    amount: 0.08737
+  };
+
   componentDidMount() {}
 
   render() {
@@ -45,8 +49,8 @@ class Wallet extends React.Component {
             <Text style={[s.f5]}>Account</Text>
             <Text style={[s.f5]}>Balance</Text>
           </View>
-          <View style={[s.flx_row, s.ml1, s.pa3]}>
-            <Text style={[s.f2, s.mr3, { color: Colors.primary }]}>0.087378</Text>
+          <View style={[s.flx_row, s.jcc, s.aic, s.ml1, s.pa3]}>
+            <Text style={[s.f2, s.mr3, { color: Colors.primary }]}>{this.state.amount}</Text>
             <Text style={[s.f3, s.mt2]}>BTC</Text>
           </View>
         </View>
@@ -58,6 +62,7 @@ class Wallet extends React.Component {
             backgroundColor={Colors.accent}
             title="Cash Out"
             leftIcon={{ name: 'send', type: 'font-awesome' }}
+            onPress={() => this.setState({ amount: 0.0 })}
           />
         </View>
         <View style={[s.pa1, s.br3, s.aic]}>
