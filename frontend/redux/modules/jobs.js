@@ -11,7 +11,7 @@ export const getAllJobs = () => async dispatch => {
   try {
     let response = await api.getAllJobs();
     if (response.status === 200) {
-      dispatch(getAllJobsSuccess(response.data));
+      dispatch(getAllJobsSuccess(response.data.data));
     }
   } catch (error) {
     console.log(error);

@@ -1,11 +1,11 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import JobItem  from '../components/JobItem';
+import JobItem from '../components/JobItem';
 import { Header, Button } from 'react-native-elements';
-import { styles as s } from 'react-native-style-tachyons'
+import { styles as s } from 'react-native-style-tachyons';
 import { connect } from 'react-redux';
 
-import {getAllJobs} from '../redux/modules/jobs'
+import { getAllJobs } from '../redux/modules/jobs';
 
 import Colors from '../constants/Colors';
 
@@ -23,7 +23,7 @@ class WorkerScreen extends React.Component {
   };
 
   componentDidMount() {
-    this.props.getAllJobs()
+    this.props.getAllJobs();
   }
 
   render() {
@@ -34,24 +34,15 @@ class WorkerScreen extends React.Component {
         hourly_bitcoin_rate: '8'
       },
       {
-        name: 'Chris Jackson',
-      },
-    ]
+        name: 'Chris Jackson'
+      }
+    ];
     return (
       <ScrollView style={styles.container}>
-          {
-            this.props.jobs.allJobs.map((l, i) => (
-              <JobItem
-                key={i}
-                name={l.title}
-                startTime= {l.start_time}
-                hourlyRate= {l.hourly_bitcoin_rate}
-              />
-            ))
-          }
-        <Button
-          backgroundColor={Colors.primary}
-          title='Find another job' />
+        {this.props.jobs.allJobs.map((l, i) => (
+          <JobItem key={i} name={l.name} startTime={l.start_time} hourlyRate={l.hourly_bitcoin_rate} />
+        ))}
+        <Button backgroundColor={Colors.primary} title="Find another job" />
       </ScrollView>
     );
   }
@@ -59,15 +50,18 @@ class WorkerScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   }
 });
 
 const mapStateToProps = state => ({
-  jobs: state.jobs,
+  jobs: state.jobs
 });
 
 const mapDispatchToProps = {
-  getAllJobs,
+  getAllJobs
 };
-export default connect(mapStateToProps, mapDispatchToProps)(WorkerScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WorkerScreen);
