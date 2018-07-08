@@ -38,12 +38,12 @@ class Wallet extends React.Component {
       <ScrollView style={styles.container}>
         <View style={[s.flx_row, s.pa3, s.bg_white, s.mb3]}>
           <View>
-            <Text style={[s.f4, { color: Colors.primary }]}>Papaya</Text>
-            <Text style={[s.f4, { color: Colors.primary }]}>Balance</Text>
+            <Text style={[s.f5, { color: Colors.primary }]}>Papaya</Text>
+            <Text style={[s.f5, { color: Colors.primary }]}>Balance</Text>
           </View>
-          <View style={[s.flx_row]}>
-            <Text style={[s.f3]}>0.087378</Text>
-            <Text style={[s.f3, { color: Colors.accent }]}>BTC</Text>
+          <View style={[s.flx_row, s.ml4, s.pa3]}>
+            <Text style={[s.f2, s.mr3, { color: Colors.primary }]}>0.087378</Text>
+            <Text style={[s.f3, s.mt2]}>BTC</Text>
           </View>
         </View>
         <View style={[s.pa3, s.bg_white, s.ma3, s.mt0, s.br3]}>
