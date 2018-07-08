@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View, Modal, TouchableHighlight } from 'react-native';
+import moment from 'moment';
 import JobItem from '../components/JobItem';
 import { Header, Button, Icon, Overlay } from 'react-native-elements';
 import { styles as s } from 'react-native-style-tachyons';
@@ -12,8 +13,31 @@ import Colors from '../constants/Colors';
 class JobDetail extends React.Component {
   state = {
     modalVisible: false,
-    user: 'worker'
+    userType: 'worker',
+    hoursWorked: moment.duration('00:00:00'),
+    jobStatus: 'pending',
+    bitcoinEarned: '0.00000',
+    interval: null
   };
+
+  tick() {
+    const BITCOIN_PER_SECOND = 0.0002;
+    b = moment.duration(1, 's');
+    this.setState({
+      hoursWorked: this.state.hoursWorked.add(b),
+      bitcoinEarned: Number.parseFloat(this.state.bitcoinEarned) + BITCOIN_PER_SECOND
+    });
+  }
+
+  startTimer() {
+    this.setState({ jobStatus: 'active' });
+    const interval = setInterval(() => this.tick(), 1000);
+    this.setState({ interval });
+  }
+
+  endJob() {
+    this.interval = clearInterval(this.state.interval);
+  }
 
   static navigationOptions = ({ navigation }) => ({
     header: (
@@ -37,11 +61,27 @@ class JobDetail extends React.Component {
     )
   });
 
-  reviewMe() {
-    console.log('blah');
+  renderStopwatch() {
+    const hours = this.state.hoursWorked.hours();
+    const minutes = this.state.hoursWorked.minutes();
+    const seconds = this.state.hoursWorked.seconds();
+
+    const showTimes = time => {
+      if (time < 10) {
+        return `0${time}`;
+      } else return time;
+    };
+    return (
+      <View>
+        <Text style={[s.f3, s.white]}>
+          {showTimes(hours)}:{showTimes(minutes)}:{showTimes(seconds)}
+        </Text>
+      </View>
+    );
   }
 
   setModalVisible = visible => {
+    console.log('blah');
     this.setState({ modalVisible: visible });
   };
 
@@ -54,19 +94,30 @@ class JobDetail extends React.Component {
     };
     return (
       <ScrollView style={styles.container}>
+        <Modal style={[s.jcc, s.aic]} transparent style={{ height: 80 }} visible={this.state.modalVisible}>
+          <View style={[{ backgroundColor: 'rgba(0, 0, 0, .5)' }, s.aic, s.mh4, s.br4, s.mt6]}>
+            <Text style={[s.f2]}>Hello</Text>
+            <Button
+              buttonStyle={[s.br3]}
+              backgroundColor={Colors.accent}
+              title="Close Modal"
+              onPress={() => this.setModalVisible(!this.state.modalVisible)}
+            />
+          </View>
+        </Modal>
         <View style={[s.bg_white, s.mb3]}>
           <JobInfo />
         </View>
-        {currentJob.status === 'active' && (
+        {this.state.jobStatus === 'active' && (
           <View style={[s.jcsb, s.mh3, s.mb2, s.br3, s.pa2, s.flx_row]}>
-            <View style={[s.bg_accent, s.br2, s.pa3]}>
-              <Text style={[s.f3, s.white]}>01:21:34</Text>
-              <View style={[s.aife]}>
+            <View style={[s.bg_accent, s.br2, s.pa3, s.jcsb, { minWidth: 155 }]}>
+              {this.renderStopwatch()}
+              <View style={[s.aife, s.jcsb]}>
                 <Text style={[s.f5, s.white]}>TIME</Text>
               </View>
             </View>
-            <View style={[s.bg_accent, s.br2, s.pa3]}>
-              <Text style={[s.f3, s.white]}>0.000121</Text>
+            <View style={[s.bg_accent, s.br2, s.pa3, { minWidth: 155 }]}>
+              <Text style={[s.f3, s.white]}>{this.state.bitcoinEarned.toString().substring(0, 7)}</Text>
               <View style={[s.aife]}>
                 <Text style={[s.f5, s.white]}>BTC</Text>
               </View>
@@ -79,28 +130,28 @@ class JobDetail extends React.Component {
           </View>
           <Text style={[s.pa2]}>{currentJob.description}</Text>
         </View>
-        {currentJob.status === 'active' &&
-          this.state.user === 'worker' && (
+        {this.state.jobStatus === 'active' &&
+          this.state.userType === 'worker' && (
             <Button
               buttonStyle={[s.br3]}
               backgroundColor={Colors.accent}
               title="End Job"
-              onPress={() => this.setModalVisible(!this.state.modalVisible)}
+              onPress={() => this.endJob()}
             />
           )}
-        {currentJob.status === 'pending' &&
-          this.state.user === 'worker' && (
-            <Button buttonStyle={[s.br3]} backgroundColor={Colors.accent} title="Start Job" />
+        {this.state.jobStatus === 'pending' &&
+          this.state.userType === 'worker' && (
+            <Button
+              buttonStyle={[s.br3]}
+              backgroundColor={Colors.accent}
+              title="Start Job"
+              onPress={() => this.startTimer()}
+            />
           )}
-        {currentJob.status === 'available' &&
-          this.state.user === 'worker' && (
+        {this.state.jobStatus === 'available' &&
+          this.state.userType === 'worker' && (
             <Button buttonStyle={[s.br3]} backgroundColor={Colors.accent} title="Join Job" />
           )}
-        <Modal style={[s.jcsa]} transparent style={{ height: 80 }} isVisible={this.state.modalVisible}>
-          <View style={[s.bg_white, s.aic]}>
-            <Text style={[s.f2]}>Hello</Text>
-          </View>
-        </Modal>
       </ScrollView>
     );
   }
