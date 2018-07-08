@@ -12,13 +12,16 @@ import Colors from '../constants/Colors';
 
 class JobDetail extends React.Component {
   state = {
-    modalVisible: false,
+    ratingModalVisible: false,
+    paymentModalOpen: false,
     userType: 'worker',
     hoursWorked: moment.duration('00:00:00'),
     jobStatus: 'pending',
     bitcoinEarned: '0.00000',
     interval: null,
+    stars: 0
     currentJob: {}
+
   };
   async componentDidMount() {
     await this.props.getAllJobs();
@@ -47,7 +50,7 @@ class JobDetail extends React.Component {
 
   endJob() {
     this.interval = clearInterval(this.state.interval);
-    this.setModalVisible(true);
+    this.setRatingModalVisible(true);
   }
 
   static navigationOptions = ({ navigation }) => ({
@@ -91,21 +94,93 @@ class JobDetail extends React.Component {
     );
   }
 
-  setModalVisible = visible => {
-    this.setState({ modalVisible: visible });
+  setRatingModalVisible = visible => {
+    this.setState({ ratingModalVisible: visible });
+  };
+
+  paymentNotification = () => {
+    this.setRatingModalVisible(!this.state.ratingModalVisible);
+    this.setState({
+      paymentModalOpen: true,
+      jobStatus: 'paid'
+    });
   };
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Modal style={[s.jcc, s.aic]} transparent style={{ height: 80 }} visible={this.state.modalVisible}>
-          <View style={[{ backgroundColor: 'rgba(0, 0, 0, .5)' }, s.aic, s.mh4, s.br4, s.mt6]}>
-            <Text style={[s.f2]}>Hello</Text>
+        <Modal
+          style={[s.jcc, s.aic, s.pa3]}
+          transparent
+          style={{ height: 80 }}
+          visible={this.state.ratingModalVisible}>
+          <View style={[{ backgroundColor: 'rgba(0, 0, 0, .9)' }, s.aic, s.mh4, s.br4, s.mt6, s.pa3]}>
+            <Text style={[s.f6, s.white]}>How were the working conditions?</Text>
+            <View style={[s.flx_row, s.mv3]}>
+              <Icon
+                key={1}
+                size={26}
+                name={this.state.stars > 0 ? 'star' : 'star-o'}
+                type="font-awesome"
+                color="white"
+                onPress={() => this.setState({ stars: 1 })}
+              />
+              <Icon
+                key={2}
+                size={26}
+                name={this.state.stars > 1 ? 'star' : 'star-o'}
+                type="font-awesome"
+                color="white"
+                onPress={() => this.setState({ stars: 2 })}
+              />
+              <Icon
+                key={3}
+                size={26}
+                name={this.state.stars > 2 ? 'star' : 'star-o'}
+                type="font-awesome"
+                color="white"
+                onPress={() => this.setState({ stars: 3 })}
+              />
+              <Icon
+                key={4}
+                size={26}
+                name={this.state.stars > 3 ? 'star' : 'star-o'}
+                type="font-awesome"
+                color="white"
+                onPress={() => this.setState({ stars: 4 })}
+              />
+              <Icon
+                key={5}
+                size={26}
+                name={this.state.stars > 4 ? 'star' : 'star-o'}
+                type="font-awesome"
+                color="white"
+                onPress={() => this.setState({ stars: 5 })}
+              />
+            </View>
             <Button
               buttonStyle={[s.br3]}
               backgroundColor={Colors.accent}
-              title="Close Modal"
-              onPress={() => this.setModalVisible(!this.state.modalVisible)}
+              title="Rate Employer"
+              onPress={() => this.paymentNotification()}
+            />
+          </View>
+        </Modal>
+        <Modal style={[s.pa3]} transparent style={{ height: 80 }} visible={this.state.paymentModalOpen}>
+          <View style={[{ backgroundColor: 'rgba(0, 0, 0, .9)' }, s.mh4, s.br4, s.mt6, s.pa3]}>
+            <View style={[s.aic]}>
+              <Text style={[s.f6, s.white]}>You got paid!</Text>
+            </View>
+            <View style={[s.mv3, s.aic]}>
+              <Icon key={1} size={45} name="check-circle" type="feather" color="white" />
+              <Text style={[s.f5, s.white, s.mt3]}>{this.state.bitcoinEarned} BTC</Text>
+              <Text style={[s.f7, s.white]}>was added to your Papaya wallet</Text>
+            </View>
+            <Button
+              buttonStyle={[s.br3]}
+              backgroundColor={Colors.accent}
+              title="Go To Wallet"
+              onPress={() => this.setState({ paymentModalOpen: false })}
             />
           </View>
         </Modal>
@@ -134,6 +209,15 @@ class JobDetail extends React.Component {
           </View>
           <Text style={[s.pa2]}>{this.state.currentJob.description}</Text>
         </View>
+        {this.state.jobStatus === 'paid' &&
+          this.state.userType === 'worker' && (
+            <Button
+              buttonStyle={[s.br3]}
+              backgroundColor={Colors.primary}
+              title="Paid"
+              rightIcon={{ name: 'check', type: 'font-awesome' }}
+            />
+          )}
         {this.state.jobStatus === 'active' &&
           this.state.userType === 'worker' && (
             <Button

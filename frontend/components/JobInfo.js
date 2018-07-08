@@ -12,13 +12,13 @@ const renderStars = (employerRating, color) => {
   var remainder = employerRating % quotient;
 
   for (i = 0; i < quotient; i++) {
-    stars.push(<Icon size={16} name="star" type="font-awesome" color={color} />);
+    stars.push(<Icon key={Math.random()} size={16} name="star" type="font-awesome" color={color} />);
   }
   if (remainder > 0) {
-    stars.push(<Icon size={16} name="star-half-o" type="font-awesome" color={color} />);
+    stars.push(<Icon key={Math.random()} size={16} name="star-half-o" type="font-awesome" color={color} />);
   }
   for (i = 0; stars.length < 5; i++) {
-    stars.push(<Icon size={16} name="star-o" type="font-awesome" color={color} />);
+    stars.push(<Icon key={Math.random()} size={16} name="star-o" type="font-awesome" color={color} />);
   }
   return stars;
 };
