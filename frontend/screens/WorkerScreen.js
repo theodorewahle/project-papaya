@@ -58,7 +58,11 @@ class WorkerScreen extends React.Component {
             employerRating={l.employer_rating}
           />
         ))}
-        <Button backgroundColor={Colors.primary} title="Find another job" />
+        <Button
+          backgroundColor={Colors.primary}
+          onPress={() => this.props.navigation.navigate('JobBoard')}
+          title="Find another job"
+        />
       </ScrollView>
     );
   }

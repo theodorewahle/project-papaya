@@ -8,10 +8,14 @@ import TabBarIcon from '../components/TabBarIcon';
 import WorkerScreen from '../screens/WorkerScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import Wallet from '../screens/Wallet';
+import JobBoard from '../screens/JobBoard';
+import JobDetail from '../screens/JobDetail';
 
 const WorkerStack = createStackNavigator({
   Worker: WorkerScreen,
-  Wallet: Wallet
+  Wallet: Wallet,
+  JobBoard: JobBoard,
+  JobDetail: JobDetail
 });
 
 WorkerStack.navigationOptions = {
