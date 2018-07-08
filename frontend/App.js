@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
-import NativeTachyons from 'react-native-style-tachyons';
+import NativeTachyons, { styles as s } from 'react-native-style-tachyons';
 
 import AppNavigator from './navigation/AppNavigator';
 import { Provider } from 'react-redux';
@@ -47,7 +47,7 @@ export default class App extends React.Component {
       return (
         <Provider store={store}>
           <View style={styles.container}>
-            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
             <AppNavigator />
           </View>
         </Provider>

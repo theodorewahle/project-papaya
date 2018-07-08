@@ -7,9 +7,11 @@ import Colors from '../constants/Colors';
 import TabBarIcon from '../components/TabBarIcon';
 import WorkerScreen from '../screens/WorkerScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import Wallet from '../screens/Wallet';
 
 const WorkerStack = createStackNavigator({
-  Worker: WorkerScreen
+  Worker: WorkerScreen,
+  Wallet: Wallet
 });
 
 WorkerStack.navigationOptions = {

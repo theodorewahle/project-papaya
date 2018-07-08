@@ -5,12 +5,11 @@ import { Header, Button, Icon } from 'react-native-elements';
 import { styles as s } from 'react-native-style-tachyons';
 import { connect } from 'react-redux';
 
-import { getAllJobs } from '../redux/modules/jobs';
-
 import Colors from '../constants/Colors';
 
-class WorkerScreen extends React.Component {
+class Wallet extends React.Component {
   static navigationOptions = ({ navigation }) => ({
+    title: 'Wallet',
     header: (
       <Header
         outerContainerStyles={{
@@ -19,46 +18,25 @@ class WorkerScreen extends React.Component {
         }}
         leftComponent={
           <Icon
-            name="face"
+            name="chevron-left"
             color={Colors.white}
             size={26}
             onPress={() => navigation.goBack()}
             hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
           />
         }
-        centerComponent={{ text: 'Upcoming Jobs', style: [s.white, s.f5] }}
-        rightComponent={
-          <Icon
-            name="redeem"
-            color={Colors.white}
-            size={26}
-            onPress={() => navigation.navigate('Wallet')}
-            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-          />
-        }
+        centerComponent={{ text: 'Wallet', style: [s.white, s.f5] }}
         backgroundColor={Colors.primary}
       />
     )
   });
 
-  componentDidMount() {
-    this.props.getAllJobs();
-  }
+  componentDidMount() {}
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        {this.props.jobs.allJobs.map((l, i) => (
-          <JobItem
-            key={i}
-            name={l.name}
-            startTime={l.start_time}
-            startDate={l.start_date}
-            hourlyRate={l.hourly_bitcoin_rate}
-            employerRating={l.employer_rating}
-          />
-        ))}
-        <Button backgroundColor={Colors.primary} title="Find another job" />
+        <Button backgroundColor={Colors.accent} title="Cash Out" />
       </ScrollView>
     );
   }
@@ -70,14 +48,10 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({
-  jobs: state.jobs
-});
+const mapStateToProps = state => ({});
 
-const mapDispatchToProps = {
-  getAllJobs
-};
+const mapDispatchToProps = {};
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(WorkerScreen);
+)(Wallet);
