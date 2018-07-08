@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19012,
-  "packagerPort": 19015,
-  "packagerPid": 36022,
-  "expoServerNgrokUrl": "https://2z-n98.theodorewahle.frontend.exp.direct",
-  "packagerNgrokUrl": "https://packager.2z-n98.theodorewahle.frontend.exp.direct",
-  "ngrokPid": 36041
+  "expoServerPort": 19006,
+  "packagerPort": 19007,
+  "packagerPid": 51705,
+  "expoServerNgrokUrl": "https://2z-n98.voshawn.frontend.exp.direct",
+  "packagerNgrokUrl": "https://packager.2z-n98.voshawn.frontend.exp.direct",
+  "ngrokPid": 47085
 }

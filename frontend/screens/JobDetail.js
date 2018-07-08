@@ -19,9 +19,8 @@ class JobDetail extends React.Component {
     jobStatus: 'pending',
     bitcoinEarned: '0.00000',
     interval: null,
-    stars: 0
+    stars: 0,
     currentJob: {}
-
   };
   async componentDidMount() {
     await this.props.getAllJobs();
@@ -180,22 +179,30 @@ class JobDetail extends React.Component {
               buttonStyle={[s.br3]}
               backgroundColor={Colors.accent}
               title="Go To Wallet"
-              onPress={() => this.setState({ paymentModalOpen: false })}
+              onPress={() => {
+                this.setState({ paymentModalOpen: false });
+                this.props.navigation.navigate('Wallet');
+              }}
             />
           </View>
         </Modal>
         <View style={[s.bg_white, s.mb3]}>
-          <JobInfo color={Colors.primaryColor} />
+          <JobInfo
+            startTime={this.state.currentJob.start_time}
+            hourlyRate={this.state.currentJob.hourly_bitcoin_rate}
+            employerRating={this.state.currentJob.employer_rating}
+            color={Colors.primary}
+          />
         </View>
         {this.state.jobStatus === 'active' && (
           <View style={[s.jcsb, s.mh3, s.mb2, s.br3, s.pa2, s.flx_row]}>
-            <View style={[s.bg_accent, s.br2, s.pa3, s.jcsb, { minWidth: 155 }]}>
+            <View style={[s.bg_primary, s.br2, s.pa3, s.jcsb, { minWidth: 155 }]}>
               {this.renderStopwatch()}
               <View style={[s.aife, s.jcsb]}>
                 <Text style={[s.f5, s.white]}>TIME</Text>
               </View>
             </View>
-            <View style={[s.bg_accent, s.br2, s.pa3, { minWidth: 155 }]}>
+            <View style={[s.bg_primary, s.br2, s.pa3, { minWidth: 155 }]}>
               <Text style={[s.f3, s.white]}>{this.state.bitcoinEarned.toString().substring(0, 7)}</Text>
               <View style={[s.aife]}>
                 <Text style={[s.f5, s.white]}>BTC</Text>
