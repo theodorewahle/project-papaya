@@ -1,9 +1,10 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View, Text } from 'react-native';
 import JobItem from '../components/JobItem';
-import { Header, Button, Icon } from 'react-native-elements';
+import { Header, Button, Icon, FormInput } from 'react-native-elements';
 import { styles as s } from 'react-native-style-tachyons';
 import { connect } from 'react-redux';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 import Colors from '../constants/Colors';
 
@@ -30,16 +31,46 @@ class AddJob extends React.Component {
     )
   });
 
+  state = {
+    isDateTimePickerVisible: false
+  };
+
+  _showDateTimePicker = () => {
+    this.setState({ isDateTimePickerVisible: true });
+  };
+
+  _hideDateTimePicker = () => {
+    this.setState({ isDateTimePickerVisible: false });
+  };
+
+  _handleDatePicked = start_time => {
+    this.setState({ start_time });
+    this._hideDateTimePicker();
+  };
   componentDidMount() {}
 
   render() {
     return (
       <ScrollView style={styles.container}>
+        <View style={[s.bg_white, s.pa3]}>
+          <Text style={[s.b, s.f5]}>When is your job?</Text>
+          <FormInput
+            placeholder="date"
+            onFocus={this._showDateTimePicker}
+            value={this.state.start_time.toString()}
+          />
+          <DateTimePicker
+            isVisible={this.state.isDateTimePickerVisible}
+            onConfirm={this._handleDatePicked}
+            onCancel={this._hideDateTimePicker}
+            mode="datetime"
+          />
+        </View>
         <Button
           buttonStyle={[s.br3]}
-          backgroundColor={Colors.accent}
+          backgroundColor={Colors.primary}
           onPress={() => this.props.navigation.navigate('AddJob')}
-          title="Post another job"
+          title="Post Job"
         />
       </ScrollView>
     );

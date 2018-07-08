@@ -54,8 +54,8 @@ const BottomTabNavigatorConfig = {
 };
 export default createBottomTabNavigator(
   {
-    WorkerStack,
-    EmployerStack
+    EmployerStack,
+    WorkerStack
   },
   BottomTabNavigatorConfig
 );
