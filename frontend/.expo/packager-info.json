@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19002,
-  "packagerPort": 19003,
-  "packagerPid": 20078,
-  "expoServerNgrokUrl": "https://g2-656.theodorewahle.frontend.exp.direct",
-  "packagerNgrokUrl": "https://packager.g2-656.theodorewahle.frontend.exp.direct",
-  "ngrokPid": 13440
+  "expoServerPort": 19000,
+  "packagerPort": 19005,
+  "packagerPid": 39033,
+  "expoServerNgrokUrl": "https://ys-twr.voshawn.frontend.exp.direct",
+  "packagerNgrokUrl": "https://packager.ys-twr.voshawn.frontend.exp.direct",
+  "ngrokPid": 37469
 }

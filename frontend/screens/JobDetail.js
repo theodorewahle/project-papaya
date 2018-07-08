@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
 import JobItem from '../components/JobItem';
 import { Header, Button, Icon } from 'react-native-elements';
 import { styles as s } from 'react-native-style-tachyons';
@@ -37,7 +37,7 @@ class JobDetail extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Button backgroundColor={Colors.primary} title="Book Job" />
+        <Text> {`Job ID: ${this.props.navigation.getParam('job', 99)}`}</Text>
       </ScrollView>
     );
   }

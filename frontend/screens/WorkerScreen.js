@@ -57,9 +57,15 @@ class WorkerScreen extends React.Component {
             startDate={l.start_date}
             hourlyRate={l.hourly_bitcoin_rate}
             employerRating={l.employer_rating}
+            onPress={() => this.props.navigation.navigate('JobDetail', { job: l.id })}
           />
         ))}
-        <Button buttonStyle={[s.br3]} backgroundColor={Colors.primary} title="Find another job" />
+        <Button
+          buttonStyle={[s.br3]}
+          backgroundColor={Colors.primary}
+          onPress={() => this.props.navigation.navigate('JobBoard')}
+          title="Find another job"
+        />
       </ScrollView>
     );
   }
