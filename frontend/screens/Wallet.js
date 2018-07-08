@@ -34,6 +34,10 @@ class Wallet extends React.Component {
   componentDidMount() {}
 
   render() {
+    const currentJob = {
+      status: 'active'
+    };
+
     return (
       <ScrollView style={styles.container}>
         <View style={[s.flx_row, s.pa3, s.bg_white, s.mb3]}>
